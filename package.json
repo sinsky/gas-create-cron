@@ -1,0 +1,17 @@
+{
+  "name": "gas-create-cron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "git+https://github.com/sinsky/gas-create-cron.git",
+  "keywords": [],
+  "author": "sinsky <60662802+sinsky@users.noreply.github.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sinsky/gas-create-cron/issues"
+  },
+  "homepage": "https://github.com/sinsky/gas-create-cron#readme"
+}
