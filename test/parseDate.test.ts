@@ -62,10 +62,10 @@ test("convertEndDateToDateList - pattern 1", () => {
   expect(result.length).toBe(endDate.getMonth() - currentDate.getMonth());
 
   // generate Date with Feb from Jun
-  const ideaDateList = [2, 3, 4, 5, 6].map((monthNumber) => new Date(new Date("2023/1/1 00:00").setMonth(monthNumber - 1)));
+  const idealDateList = [2, 3, 4, 5, 6].map((monthNumber) => new Date(new Date("2023/1/1 00:00").setMonth(monthNumber - 1)));
   // [(new Date("2023/2/1 00:00"), new Date("2023/3/1 00:00"), new Date("2023/4/1 00:00"), new Date("2023/5/1 00:00"), new Date("2023/6/1 00:00"))];
   const result_UTCStringList = result.map((date) => date.toUTCString());
-  const idealList_UTCStringList = ideaDateList.map((date) => date.toUTCString());
+  const idealList_UTCStringList = idealDateList.map((date) => date.toUTCString());
   for (let i = 0; i < result.length; i++) {
     expect(result_UTCStringList[i]).toStrictEqual(idealList_UTCStringList[i]);
   }
@@ -83,10 +83,10 @@ test("convertEndDateToDateList - pattern 2", () => {
   expect(result.length).toBe(20);
 
   // generate Date with 2022 Feb from 2024 Sep
-  const ideaDateList = [...[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((monthNumber) => new Date(new Date("2023/1/1 00:00").setMonth(monthNumber - 1))), ...[1, 2, 3, 4, 5, 6, 7, 8, 9].map((monthNumber) => new Date(new Date("2024/1/1 00:00").setMonth(monthNumber - 1)))];
+  const idealDateList = [...[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((monthNumber) => new Date(new Date("2023/1/1 00:00").setMonth(monthNumber - 1))), ...[1, 2, 3, 4, 5, 6, 7, 8, 9].map((monthNumber) => new Date(new Date("2024/1/1 00:00").setMonth(monthNumber - 1)))];
 
   const result_UTCStringList = result.map((date) => date.toUTCString());
-  const idealList_UTCStringList = ideaDateList.map((date) => date.toUTCString());
+  const idealList_UTCStringList = idealDateList.map((date) => date.toUTCString());
   for (let i = 0; i < result.length; i++) {
     expect(result_UTCStringList[i]).toStrictEqual(idealList_UTCStringList[i]);
   }
@@ -104,10 +104,10 @@ test("convertLimitToDateList - pattern 1", () => {
 
   expect(result.length).toBe(limit);
 
-  const ideaDateList = [...[2, 3, 4, 5, 6].map((monthNumber) => new Date(currentDate.setMonth(monthNumber - 1)))];
+  const idealDateList = [...[2, 3, 4, 5, 6].map((monthNumber) => new Date(currentDate.setMonth(monthNumber - 1)))];
 
   const result_UTCStringList = result.map((date) => date.toUTCString());
-  const idealList_UTCStringList = ideaDateList.map((date) => date.toUTCString());
+  const idealList_UTCStringList = idealDateList.map((date) => date.toUTCString());
   for (let i = 0; i < result.length; i++) {
     expect(result_UTCStringList[i]).toStrictEqual(idealList_UTCStringList[i]);
   }
@@ -126,10 +126,10 @@ test("convertLimitToDateList - pattern 2", () => {
 
   expect(result.length).toBe(endDate.getMonth() - currentDate.getMonth());
 
-  const ideaDateList = [...[2, 3].map((monthNumber) => new Date(currentDate.setMonth(monthNumber - 1)))];
+  const idealDateList = [...[2, 3].map((monthNumber) => new Date(currentDate.setMonth(monthNumber - 1)))];
 
   const result_UTCStringList = result.map((date) => date.toUTCString());
-  const idealList_UTCStringList = ideaDateList.map((date) => date.toUTCString());
+  const idealList_UTCStringList = idealDateList.map((date) => date.toUTCString());
   for (let i = 0; i < result.length; i++) {
     expect(result_UTCStringList[i]).toStrictEqual(idealList_UTCStringList[i]);
   }
