@@ -14,7 +14,7 @@ const formatDate = (date: Date, format: string = "yyyy/MM/dd") => {
   return format;
 };
 
-const cronText = "0 0 * * * ";
+const cronText = "0 0 1 * * ";
 
 const defaultOptions = {
   limit: 3,
@@ -40,7 +40,7 @@ test.concurrent.each([
   const dateList = parseDate(cronText, options);
   expect(dateList.length).toBe(options.limit);
 
-  const idealDateList = [new Date("2023/1/2 00:00"), new Date("2023/1/3 00:00"), new Date("2023/1/4 00:00")];
+  const idealDateList = [new Date("2023/2/1 00:00"), new Date("2023/3/1 00:00"), new Date("2023/4/1 00:00")];
   expect(dateList.map((date) => date.toUTCString())).toStrictEqual(idealDateList.map((date) => date.toUTCString()));
 });
 
