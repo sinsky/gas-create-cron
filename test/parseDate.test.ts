@@ -41,7 +41,12 @@ test.concurrent.each([
   expect(dateList.length).toBe(options.limit);
 
   const idealDateList = [new Date("2023/2/1 00:00"), new Date("2023/3/1 00:00"), new Date("2023/4/1 00:00")];
-  expect(dateList.map((date) => date.toUTCString())).toStrictEqual(idealDateList.map((date) => date.toUTCString()));
+
+  const dateList_UTCStringList = dateList.map((date) => date.toUTCString());
+  const idealList_UTCStringList = idealDateList.map((date) => date.toUTCString());
+  for (let i = 0; i < dateList.length; i++) {
+    expect(dateList_UTCStringList[i]).toStrictEqual(idealList_UTCStringList[i]);
+  }
 });
 
 /**
