@@ -75,4 +75,37 @@ test("convertEndDateToDateList - pattern 2", () => {
   }
 });
 
-test.todo("convertLimitToDateList");
+test("convertLimitToDateList - pattern 1", () => {
+  const currentDate = new Date("2023/1/1 00:00");
+  const count = 5;
+  const cron = parseExpression("0 0 1 * *", { ...defaultOptions, currentDate });
+  const result = convertLimitToDateList(cron, count);
+
+  expect(result.length).toBe(count);
+
+  const ideaDateList = [...[2, 3, 4, 5, 6].map((monthNumber) => new Date(currentDate.setMonth(monthNumber - 1)))];
+
+  const result_UTCStringList = result.map((date) => date.toUTCString());
+  const idealList_UTCStringList = ideaDateList.map((date) => date.toUTCString());
+  for (let i = 0; i < result.length; i++) {
+    expect(result_UTCStringList[i]).toStrictEqual(idealList_UTCStringList[i]);
+  }
+});
+
+test("convertLimitToDateList - pattern 2", () => {
+  const currentDate = new Date("2023/1/1 00:00");
+  const endDate = new Date("2023/3/31 23:59");
+  const count = 5;
+  const cron = parseExpression("0 0 1 * *", { ...defaultOptions, currentDate, endDate });
+  const result = convertLimitToDateList(cron, count);
+
+  expect(result.length).toBe(endDate.getMonth() - currentDate.getMonth());
+
+  const ideaDateList = [...[2, 3].map((monthNumber) => new Date(currentDate.setMonth(monthNumber - 1)))];
+
+  const result_UTCStringList = result.map((date) => date.toUTCString());
+  const idealList_UTCStringList = ideaDateList.map((date) => date.toUTCString());
+  for (let i = 0; i < result.length; i++) {
+    expect(result_UTCStringList[i]).toStrictEqual(idealList_UTCStringList[i]);
+  }
+});
