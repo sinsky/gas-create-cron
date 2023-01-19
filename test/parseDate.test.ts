@@ -38,7 +38,7 @@ test.concurrent.each([
 ])("Check cronjob %s", async (title, currentDate) => {
   const options = { currentDate, ...defaultOptions };
   const dateList = parseDate(cronText, options);
-  expect(dateList.length).toBe(3);
+  expect(dateList.length).toBe(options.limit);
 
   const idealDateList = [new Date("2023/1/2 00:00"), new Date("2023/1/3 00:00"), new Date("2023/1/4 00:00")];
   expect(dateList.map((date) => date.toUTCString())).toStrictEqual(idealDateList.map((date) => date.toUTCString()));
@@ -54,7 +54,7 @@ test("convertEndDateToDateList - pattern 1", () => {
   const cron = parseExpression("0 0 1 * *", { ...defaultOptions, currentDate, endDate });
   const result = convertEndDateToDateList(cron);
 
-  expect(result.length).toBe(5);
+  expect(result.length).toBe(endDate.getMonth() - currentDate.getMonth());
 
   // generate Date with Feb from Jun
   const ideaDateList = [2, 3, 4, 5, 6].map((monthNumber) => new Date(new Date("2023/1/1 00:00").setMonth(monthNumber - 1)));
@@ -93,11 +93,11 @@ test("convertEndDateToDateList - pattern 2", () => {
  */
 test("convertLimitToDateList - pattern 1", () => {
   const currentDate = new Date("2023/1/1 00:00");
-  const count = 5;
+  const limit = 5;
   const cron = parseExpression("0 0 1 * *", { ...defaultOptions, currentDate });
-  const result = convertLimitToDateList(cron, count);
+  const result = convertLimitToDateList(cron, limit);
 
-  expect(result.length).toBe(count);
+  expect(result.length).toBe(limit);
 
   const ideaDateList = [...[2, 3, 4, 5, 6].map((monthNumber) => new Date(currentDate.setMonth(monthNumber - 1)))];
 
@@ -115,9 +115,9 @@ test("convertLimitToDateList - pattern 1", () => {
 test("convertLimitToDateList - pattern 2", () => {
   const currentDate = new Date("2023/1/1 00:00");
   const endDate = new Date("2023/3/31 23:59");
-  const count = 5;
+  const limit = 5;
   const cron = parseExpression("0 0 1 * *", { ...defaultOptions, currentDate, endDate });
-  const result = convertLimitToDateList(cron, count);
+  const result = convertLimitToDateList(cron, limit);
 
   expect(result.length).toBe(endDate.getMonth() - currentDate.getMonth());
 
