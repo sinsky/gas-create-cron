@@ -27,6 +27,10 @@ const items = {
   millisecond: date.getTime(),
 };
 
+/**
+ * parseDateのテストケース
+ * それぞれJSDate,ISO8601,UnitTimestampの値を引数に渡し、期待値が帰って来ることを確認する
+ */
 test.concurrent.each([
   ["JS Date", items.jsDate],
   ["ISO 8601", items.iso],
@@ -40,6 +44,10 @@ test.concurrent.each([
   expect(dateList.map((date) => date.toUTCString())).toStrictEqual(idealDateList.map((date) => date.toUTCString()));
 });
 
+/**
+ * convertEndDateToDateListのテストケース1
+ * endDateを指定し、期待通りの個数が帰って来ることを確認する
+ */
 test("convertEndDateToDateList - pattern 1", () => {
   const currentDate = new Date("2023/1/1 00:00");
   const endDate = new Date("2023/6/30 23:59");
@@ -58,6 +66,10 @@ test("convertEndDateToDateList - pattern 1", () => {
   }
 });
 
+/**
+ * convertEndDateToDateListのテストケース2
+ * endDateの指定をしないため、関数側で制限された20個の値が返って来ることを確認する
+ */
 test("convertEndDateToDateList - pattern 2", () => {
   const currentDate = new Date("2023/1/1 00:00");
   const cron = parseExpression("0 0 1 * *", { ...defaultOptions, currentDate });
@@ -75,6 +87,10 @@ test("convertEndDateToDateList - pattern 2", () => {
   }
 });
 
+/**
+ * convertLimitToDateListのテストケース1
+ * limit数を指定し、期待値通りのDateリストが返って来ることを確認する
+ */
 test("convertLimitToDateList - pattern 1", () => {
   const currentDate = new Date("2023/1/1 00:00");
   const count = 5;
@@ -92,6 +108,10 @@ test("convertLimitToDateList - pattern 1", () => {
   }
 });
 
+/**
+ * convertLimitToDateListのテストケース2
+ * limit数を指定するが、endDateによりlimit数未満のDateリストが返って来ることを確認する
+ */
 test("convertLimitToDateList - pattern 2", () => {
   const currentDate = new Date("2023/1/1 00:00");
   const endDate = new Date("2023/3/31 23:59");
